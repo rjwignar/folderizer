@@ -1,4 +1,4 @@
-# folderizer
+# folderizer (WIP)
 
 [![PyPI](https://img.shields.io/pypi/v/folderizer.svg)](https://pypi.org/project/folderizer/)
 [![Tests](https://github.com/rjwignar/folderizer/actions/workflows/test.yml/badge.svg)](https://github.com/rjwignar/folderizer/actions/workflows/test.yml)
