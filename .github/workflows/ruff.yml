@@ -1,0 +1,18 @@
+# .github/workflows/ruff.yml
+
+name: Ruff
+
+on:
+    pull_request:
+      branches:
+        - main
+    push:
+      branches:
+        - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v4
+            - uses: chartboost/ruff-action@v1
