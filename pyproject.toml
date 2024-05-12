@@ -26,3 +26,7 @@ CI = "https://github.com/rjwignar/folderizer/actions"
 
 [project.optional-dependencies]
 test = ["pytest"]
+dev = [
+  "ruff",
+  "mypy"
+]
