@@ -17,7 +17,7 @@ def main():
         description="File organization command-line tool.",
         epilog="Thanks for using %(prog)s!")
     parser.add_argument('filepath')
-    parser.add_argument("-v","--version", action="version", version="%(prog)s 0.1.0")
+    parser.add_argument("-v","--version", action="version", version="%(prog)s 0.1.1")
     parser.add_argument("-d", "--default", action='store_true', help="Sorts files into folders by category (image, video, text, code, etc)")
     args = parser.parse_args()
     print(args, args.filepath, args.default)
