@@ -36,7 +36,7 @@ if args.default:
                     if os.path.splitext(entry.name)[1] in images:
                         imageCount+=1
                         print("image detected")
-                        imagePath = target_path + '\images'
+                        imagePath = os.path.join(target_path, "images")
                         print(imagePath)
                         if not (os.access(imagePath, os.F_OK)):
                             print('creating images folder')
@@ -56,7 +56,7 @@ if args.default:
                     elif os.path.splitext(entry.name)[1] in videos:
                         videoCount+=1
                         print("video detected")
-                        videoPath = target_path + r'\videos'
+                        videoPath = os.path.join(target_path, "videos")
                         print(videoPath)
                         if not (os.access(videoPath, os.F_OK)):
                             print('creating videos folder!')
@@ -76,7 +76,7 @@ if args.default:
                     elif os.path.splitext(entry.name)[1] in text:
                         textCount+=1
                         print("text file detected")
-                        textPath = target_path + r'\textFiles'
+                        textPath = os.path.join(target_path, "textFiles")
                         print(textPath)
                         if not (os.access(textPath, os.F_OK)):
                             print('creating textFiles folder!')
