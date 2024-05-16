@@ -20,7 +20,7 @@ parser.add_argument("-v","--version", action="version", version="%(prog)s 0.1.0"
 parser.add_argument("-d", "--default", action='store_true', help="Sorts files into folders by category (image, video, text, code, etc)")
 args = parser.parse_args()
 print(args, args.filepath, args.default)
-if args.default == True:
+if args.default:
     print("Default behaviour")
     print(os.path.abspath(args.filepath))
     target_path = os.path.abspath(args.filepath)
