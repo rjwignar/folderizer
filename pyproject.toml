@@ -1,6 +1,6 @@
 [project]
 name = "folderizer"
-version = "0.1"
+version = "0.1.1"
 description = "A Python script for file organization"
 readme = "README.md"
 requires-python = ">=3.8"
