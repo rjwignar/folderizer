@@ -38,19 +38,12 @@ def main():
     print(args, args.filepath, args.default)
 
     def defaultBehavior():
-        print("Default behaviour")
-        print("Default behaviour")
-        print(os.path.abspath(args.filepath))
         target_path = os.path.abspath(args.filepath)
-        print("Target Path: " + target_path)
         if (os.access(target_path, os.F_OK)):
-            print("Filepath exists")
-            print(os.scandir(target_path))
             with os.scandir(target_path) as it:
                 for entry in it:
                     if not entry.name.startswith('.') and entry.is_file():
-                        print("Entry name: " + entry.name)
-                        print(os.path.splitext(entry.name)[1])
+                        # Extract file extension from entry
                         fileExtension = os.path.splitext(entry.name)[1]
                         for fileType, properties in fileCategories.items():
                             if fileExtension in properties['extensions']:
