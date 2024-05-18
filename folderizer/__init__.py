@@ -47,19 +47,12 @@ def main():
                         print(os.path.splitext(entry.name)[1])
                         if os.path.splitext(entry.name)[1] in images:
                             imageCount+=1
-                            print("image detected")
-                            imagePath = os.path.join(target_path, "images")
-                            print(imagePath)
-                            if not (os.access(imagePath, os.F_OK)):
-                                print('creating images folder')
-                                os.mkdir(imagePath)
-                            else:
-                                print("not creating images folder")
+                            folderPath = createFolder(target_path, "images")
                             # move file to images folder
                             print("Image file name: " + entry.name)
                             print(entry)
                             oldPath = target_path + "\\" + entry.name
-                            newPath = imagePath + "\\" + entry.name
+                            newPath = folderPath + "\\" + entry.name
                             print("old filepath: " + oldPath)
                             print("new filepath: " + newPath)
                             # attempt rename
@@ -67,19 +60,12 @@ def main():
                             movedImagesCount+=1
                         elif os.path.splitext(entry.name)[1] in videos:
                             videoCount+=1
-                            print("video detected")
-                            videoPath = os.path.join(target_path, "videos")
-                            print(videoPath)
-                            if not (os.access(videoPath, os.F_OK)):
-                                print('creating videos folder!')
-                                os.mkdir(videoPath)
-                            else:
-                                print("not creating videos folder") 
+                            folderPath = createFolder(target_path, "videos")
                             # move file to videos folder
                             print("Video file name: " + entry.name)
                             print(entry)
                             oldPath = target_path + "\\" + entry.name
-                            newPath = videoPath + "\\" + entry.name
+                            newPath = folderPath + "\\" + entry.name
                             print("old filepath: " + oldPath)
                             print("new filepath: " + newPath)
                             # attempt rename
@@ -87,19 +73,12 @@ def main():
                             movedVideosCount+=1
                         elif os.path.splitext(entry.name)[1] in text:
                             textCount+=1
-                            print("text file detected")
-                            textPath = os.path.join(target_path, "textFiles")
-                            print(textPath)
-                            if not (os.access(textPath, os.F_OK)):
-                                print('creating textFiles folder!')
-                                os.mkdir(textPath)
-                            else:
-                                print("not creating textFiles folder")
+                            folderPath = createFolder(target_path, "textFiles")
                             # move file to videos folder
                             print("Text file name: " + entry.name)
                             print(entry)
                             oldPath = target_path + "\\" + entry.name
-                            newPath = textPath + "\\" + entry.name
+                            newPath = folderPath + "\\" + entry.name
                             print("old filepath: " + oldPath)
                             print("new filepath: " + newPath)
                             # attempt rename
