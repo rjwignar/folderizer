@@ -60,40 +60,19 @@ def main():
                             imageCount+=1
                             folderPath = createFolder(target_path, "images")
                             # move file to images folder
-                            print("Image file name: " + entry.name)
-                            print(entry)
-                            oldPath = target_path + "\\" + entry.name
-                            newPath = folderPath + "\\" + entry.name
-                            print("old filepath: " + oldPath)
-                            print("new filepath: " + newPath)
-                            # attempt rename
-                            os.rename(oldPath, newPath)
+                            moveFile(target_path, "images", entry)
                             movedImagesCount+=1
                         elif os.path.splitext(entry.name)[1] in videos:
                             videoCount+=1
                             folderPath = createFolder(target_path, "videos")
                             # move file to videos folder
-                            print("Video file name: " + entry.name)
-                            print(entry)
-                            oldPath = target_path + "\\" + entry.name
-                            newPath = folderPath + "\\" + entry.name
-                            print("old filepath: " + oldPath)
-                            print("new filepath: " + newPath)
-                            # attempt rename
-                            os.rename(oldPath, newPath)
+                            moveFile(target_path, "videos", entry)
                             movedVideosCount+=1
                         elif os.path.splitext(entry.name)[1] in text:
                             textCount+=1
                             folderPath = createFolder(target_path, "textFiles")
                             # move file to videos folder
-                            print("Text file name: " + entry.name)
-                            print(entry)
-                            oldPath = target_path + "\\" + entry.name
-                            newPath = folderPath + "\\" + entry.name
-                            print("old filepath: " + oldPath)
-                            print("new filepath: " + newPath)
-                            # attempt rename
-                            os.rename(oldPath, newPath)
+                            moveFile(target_path, "textFiles", entry)
                             movedTextFilesCount+=1
                 print('------------------------------------')
                 print('SUMMARY')
