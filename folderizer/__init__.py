@@ -16,6 +16,14 @@ fileCategories = {}
 def addFileCategory(categoryName, extensions):
     fileCategories[categoryName] = {"folderName": f"{categoryName}", "extensions" : extensions, "fileCount" : 0, "movedCount" : 0}
 
+def dictionarySummary(dictionary):
+    print('------------------------------------')
+    print('SUMMARY')
+    print('------------------------------------')
+    for entry, properties in dictionary.items():
+        print(f"{entry} found: {properties['fileCount']}")
+        print(f"{entry} successfully moved: {properties['movedCount']}")
+
 def main():
     # Define extensions
     imageExtensions = [".jpeg", ".jpg", ".png", ".gif"]
@@ -53,12 +61,7 @@ def main():
                                 newPath = os.path.join(target_path, fileType, entry.name)
                                 os.rename(oldPath, newPath)
                                 properties['movedCount'] +=1
-                print('------------------------------------')
-                print('SUMMARY')
-                print('------------------------------------')
-                for fileType, properties in fileCategories.items():
-                    print(f"{fileType} found: {properties['fileCount']}")
-                    print(f"{fileType} successfully moved: {properties['movedCount']}")
+                dictionarySummary(fileCategories)
         else:           
             print("Filepath doesn't exist")
 
