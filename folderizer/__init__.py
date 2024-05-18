@@ -1,6 +1,17 @@
 import argparse
 import os
 
+def createFolder(targetPath, folderName):
+    print(folderName + " type detected")
+    folderPath = os.path.join(targetPath, folderName)
+    print(folderPath)
+    if not (os.access(folderPath, os.F_OK)):
+        print('creating images folder')
+        os.mkdir(folderPath)
+    else:
+        print(folderPath + " already created")
+    return folderPath
+
 def main():
     images = [".jpeg", ".jpg", ".png", ".gif"]
     videos = [".mp4", ".flv", ".m4v", ".webm"]
@@ -110,14 +121,3 @@ def example_function():
 
 if __name__ == "__main__":
     main()
-
-def createFolder(targetPath, folderName):
-    print(folderName + " type detected")
-    folderPath = os.path.join(targetPath, folderName)
-    print(folderPath)
-    if not (os.access(folderPath, os.F_OK)):
-        print('creating images folder')
-        os.mkdir(folderPath)
-    else:
-        print(folderPath + " already created")
-    return folderPath
