@@ -12,17 +12,6 @@ def createFolder(targetPath, folderName):
         print(folderPath + " already created")
     return folderPath
 
-def moveFile(targetPath, folderName, file):
-    # move file to images folder
-    print("File name: " + file.name)
-    print(file)
-    oldPath = os.path.join(targetPath, file.name)
-    newPath = os.path.join(targetPath, folderName, file.name)
-    print("old filepath: " + oldPath)
-    print("new filepath: " + newPath)
-    # attempt rename
-    os.rename(oldPath, newPath)
-
 def main():
     images = [".jpeg", ".jpg", ".png", ".gif"]
     videos = [".mp4", ".flv", ".m4v", ".webm"]
@@ -58,21 +47,31 @@ def main():
                         print(os.path.splitext(entry.name)[1])
                         if os.path.splitext(entry.name)[1] in images:
                             imageCount+=1
-                            folderPath = createFolder(target_path, "images")
+                            createFolder(target_path, "images")
                             # move file to images folder
-                            moveFile(target_path, "images", entry)
+                            oldPath = os.path.join(target_path, entry.name)
+                            newPath = os.path.join(target_path, "images", entry.name)
+                            print("old filepath: " + oldPath)
+                            print("new filepath: " + newPath)
+                            # attempt rename
+                            os.rename(oldPath, newPath)
                             movedImagesCount+=1
                         elif os.path.splitext(entry.name)[1] in videos:
                             videoCount+=1
-                            folderPath = createFolder(target_path, "videos")
+                            createFolder(target_path, "videos")
                             # move file to videos folder
-                            moveFile(target_path, "videos", entry)
+                            oldPath = os.path.join(target_path, entry.name)
+                            newPath = os.path.join(target_path, "videos", entry.name)
+                            # attempt rename
+                            os.rename(oldPath, newPath)
                             movedVideosCount+=1
                         elif os.path.splitext(entry.name)[1] in text:
                             textCount+=1
-                            folderPath = createFolder(target_path, "textFiles")
-                            # move file to videos folder
-                            moveFile(target_path, "textFiles", entry)
+                            createFolder(target_path, "textFiles")
+                            # move file to textFiles folder
+                            oldPath = os.path.join(target_path, entry.name)
+                            newPath = os.path.join(target_path, "textFiles", entry.name)
+                            os.rename(oldPath, newPath)
                             movedTextFilesCount+=1
                 print('------------------------------------')
                 print('SUMMARY')
