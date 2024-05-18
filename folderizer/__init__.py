@@ -12,16 +12,20 @@ def createFolder(targetPath, folderName):
         print(folderPath + " already created")
     return folderPath
 
+fileCategories = {}
+def addFileCategory(categoryName, extensions):
+    fileCategories[categoryName] = {"folderName": f"{categoryName}", "extensions" : extensions, "fileCount" : 0, "movedCount" : 0}
+
 def main():
-    images = [".jpeg", ".jpg", ".png", ".gif"]
-    videos = [".mp4", ".flv", ".m4v", ".webm"]
-    text = [ ".txt", ".md", ".doc", ".docx", ".pdf"]
-    imageCount = 0
-    movedImagesCount = 0
-    videoCount = 0
-    movedVideosCount = 0
-    textCount = 0
-    movedTextFilesCount = 0
+    # Define extensions
+    imageExtensions = [".jpeg", ".jpg", ".png", ".gif"]
+    videoExtensions = [".mp4", ".flv", ".m4v", ".webm"]
+    textExtensions = [ ".txt", ".md", ".doc", ".docx", ".pdf"]
+
+    # Populate fileCategories with category and extensions
+    addFileCategory("images", imageExtensions)
+    addFileCategory("videos", videoExtensions)
+    addFileCategory("textFiles", textExtensions)
 
     parser = argparse.ArgumentParser(
         prog="folderizer",
@@ -32,7 +36,9 @@ def main():
     parser.add_argument("-d", "--default", action='store_true', help="Sorts files into folders by category (image, video, text, code, etc)")
     args = parser.parse_args()
     print(args, args.filepath, args.default)
-    if args.default:
+
+    def defaultBehavior():
+        print("Default behaviour")
         print("Default behaviour")
         print(os.path.abspath(args.filepath))
         target_path = os.path.abspath(args.filepath)
@@ -45,45 +51,27 @@ def main():
                     if not entry.name.startswith('.') and entry.is_file():
                         print("Entry name: " + entry.name)
                         print(os.path.splitext(entry.name)[1])
-                        if os.path.splitext(entry.name)[1] in images:
-                            imageCount+=1
-                            createFolder(target_path, "images")
-                            # move file to images folder
-                            oldPath = os.path.join(target_path, entry.name)
-                            newPath = os.path.join(target_path, "images", entry.name)
-                            print("old filepath: " + oldPath)
-                            print("new filepath: " + newPath)
-                            # attempt rename
-                            os.rename(oldPath, newPath)
-                            movedImagesCount+=1
-                        elif os.path.splitext(entry.name)[1] in videos:
-                            videoCount+=1
-                            createFolder(target_path, "videos")
-                            # move file to videos folder
-                            oldPath = os.path.join(target_path, entry.name)
-                            newPath = os.path.join(target_path, "videos", entry.name)
-                            # attempt rename
-                            os.rename(oldPath, newPath)
-                            movedVideosCount+=1
-                        elif os.path.splitext(entry.name)[1] in text:
-                            textCount+=1
-                            createFolder(target_path, "textFiles")
-                            # move file to textFiles folder
-                            oldPath = os.path.join(target_path, entry.name)
-                            newPath = os.path.join(target_path, "textFiles", entry.name)
-                            os.rename(oldPath, newPath)
-                            movedTextFilesCount+=1
+                        fileExtension = os.path.splitext(entry.name)[1]
+                        for fileType, properties in fileCategories.items():
+                            if fileExtension in properties['extensions']:
+                                properties['fileCount'] +=1
+                                createFolder(target_path, fileType)
+                                oldPath = os.path.join(target_path, entry.name)
+                                newPath = os.path.join(target_path, fileType, entry.name)
+                                os.rename(oldPath, newPath)
+                                properties['movedCount'] +=1
                 print('------------------------------------')
                 print('SUMMARY')
                 print('------------------------------------')
-                print('Images found: ',imageCount)
-                print('Images successfully moved: ', movedImagesCount)
-                print('Videos found: ',videoCount)
-                print('Videos successfully moved: ', movedVideosCount)
-                print('Text files found: ',textCount)
-                print('Text files successfully moved: ', movedTextFilesCount)
+                for fileType, properties in fileCategories.items():
+                    print(f"{fileType} found: {properties['fileCount']}")
+                    print(f"{fileType} successfully moved: {properties['movedCount']}")
         else:           
             print("Filepath doesn't exist")
+
+    if args.default:
+        defaultBehavior()
+    
 def example_function():
     return 1 + 1
 
