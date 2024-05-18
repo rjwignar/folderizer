@@ -12,6 +12,17 @@ def createFolder(targetPath, folderName):
         print(folderPath + " already created")
     return folderPath
 
+def moveFile(targetPath, folderName, file):
+    # move file to images folder
+    print("File name: " + file.name)
+    print(file)
+    oldPath = os.path.join(targetPath, file.name)
+    newPath = os.path.join(targetPath, folderName, file.name)
+    print("old filepath: " + oldPath)
+    print("new filepath: " + newPath)
+    # attempt rename
+    os.rename(oldPath, newPath)
+
 def main():
     images = [".jpeg", ".jpg", ".png", ".gif"]
     videos = [".mp4", ".flv", ".m4v", ".webm"]
